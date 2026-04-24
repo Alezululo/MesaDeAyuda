@@ -1,0 +1,70 @@
+﻿@model MesaDeAyuda.Models.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="login-page">
+    <div class="login-container">
+        <h2>Mesa de Ayuda</h2>
+
+        <!-- Mensajes de error generales -->
+        <div asp-validation-summary="ModelOnly" class="field-validation"></div>
+
+        <form asp-controller="Account" asp-action="Login" method="post" autocomplete="off">
+            @Html.AntiForgeryToken()
+
+            <div class="input-group">
+                <input asp-for="Usuario" type="text" placeholder=" " autocomplete="username" />
+                <label asp-for="Usuario">Usuario</label>
+            </div>
+            <span asp-validation-for="Usuario" class="field-validation"></span>
+
+            <div class="input-group">
+                <input asp-for="Contrasena" type="password" placeholder=" " autocomplete="current-password" />
+                <label asp-for="Contrasena">Contraseña</label>
+            </div>
+            <span asp-validation-for="Contrasena" class="field-validation"></span>
+
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+
+        <div class="links">
+            <a href="javascript:void(0)" onclick="mostrarMensajeCuenta()">No tengo cuenta</a>
+        </div>
+
+        @if (ViewBag.LoginError != null)
+        {
+            <div class="login-error">@ViewBag.LoginError</div>
+        }
+    </div>
+
+    <div class="alert" id="alertaCuenta">
+        <svg class="alert-icon" viewBox="0 0 24 24" fill="#D4A017">
+            <path d="M12 2L1 21h22L12 2zm0 14h-2v-2h2v2zm0-4h-2V8h2v4z" />
+        </svg>
+
+        <div class="alert-content">
+            <div class="alert-title">Solicitud requerida</div>
+            Para obtener acceso, debes solicitar la creación de tu cuenta al área encargada del sistema.
+        </div>
+
+        <div class="close-btn" onclick="cerrarAlerta('alertaCuenta')">×</div>
+    </div>
+
+    <div class="theme-switch">
+        <label class="switch">
+            <input type="checkbox" onchange="toggleTheme()">
+            <span class="slider"></span>
+        </label>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/login.js" asp-append-version="true"></script>
+}

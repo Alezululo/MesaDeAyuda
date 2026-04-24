@@ -1,0 +1,8 @@
+﻿@model MesaDeAyuda.Models.Entities.HistorialEstadoTicket
+
+<div class="modal-section">
+    <p><strong>Estado Anterior:</strong> @Model.EstadoAnterior?.Nombre</p>
+    <p><strong>Estado Nuevo:</strong> @Model.EstadoNuevo?.Nombre</p>
+    <p><strong>Usuario:</strong> @Model.Usuario?.Nombre</p>
+    <p><strong>Fecha:</strong> @Model.Fecha</p>
+</div>

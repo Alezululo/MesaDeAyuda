@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Acceso Denegado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="access-wrapper">
+    <div class="glass-morph-card">
+        <div class="card-glow"></div>
+
+        <div class="card-content">
+            <div class="icon-container">
+                <div class="shield-hex">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+            </div>
+
+            <h1 class="denied-title">Módulo Restringido</h1>
+
+            <p class="denied-text">
+                Tu nivel de autorización actual no permite el ingreso a esta sección del sistema.
+                Si necesitas acceso, por favor solicita una actualización de permisos a través de un ticket de soporte.
+            </p>
+
+            <div class="action-area">
+                <a href="@Url.Action("Index", "Home")" class="main-button">
+                    <span>Ir al Dashboard</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+
+            <div class="meta-info">
+                <span class="code-tag">Error: 403 Forbidden</span>
+                <span class="system-tag">Help Desk Enterprise v1.0</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="theme-switch">
+    <label class="switch">
+        <input type="checkbox" onchange="toggleTheme()">
+        <span class="slider"></span>
+    </label>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}

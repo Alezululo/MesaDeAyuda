@@ -1,0 +1,9 @@
+﻿@model MesaDeAyuda.Models.Entities.AuditoriaUsuario
+
+<div class="modal-section">
+    <p><strong>Usuario Afectado:</strong> @Model.UsuarioAfectado?.Username</p>
+    <p><strong>Acción:</strong> @Model.Accion</p>
+    <p><strong>Detalle:</strong> @Model.Detalle</p>
+    <p><strong>Ejecutado por:</strong> @Model.UsuarioAccion?.Nombre</p>
+    <p><strong>Fecha:</strong> @Model.Fecha.ToString("yyyy-MM-dd HH:mm")</p>
+</div>

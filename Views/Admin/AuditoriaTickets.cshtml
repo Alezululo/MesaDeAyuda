@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Auditoría de Tickets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var usuariosTickets = ViewBag.UsuariosTickets as List<string> ?? new List<string>();
+}
+
+<div class="page-layout">
+    <div class="sidebar">
+        <h2>Administración</h2>
+        <ul>
+            <li><a href="@Url.Action("AuditoriaTickets", "Admin")">Auditoría de Tickets</a></li>
+            <li><a href="@Url.Action("AuditoriaUsuarios", "Admin")">Auditoría de Usuarios</a></li>
+            <li><a href="@Url.Action("Index", "Home")">← Volver al menú principal</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <h1>Auditoría de Tickets</h1>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label>Filtrar por Ticket</label>
+                <input type="text" id="filtroTicket" placeholder="Ej: TCK-0001" />
+            </div>
+
+            <div class="filter-group">
+                <label>Cambio de</label>
+                <select id="filtroTipo">
+                    <option value="">Todos</option>
+                    <option value="Estado">Estado</option>
+                    <option value="Asignación">Asignación</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Usuario</label>
+                <select id="filtroUsuario">
+                    <option value="">Todos</option>
+                    @foreach (var u in usuariosTickets)
+                    {
+                        <option value="@u">@u</option>
+                    }
+                </select>
+            </div>
+
+            <div style="display:flex; align-items:end;">
+                <button class="btn-action" onclick="cargarAuditoriaTickets()">Filtrar</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ticket</th>
+                        <th>Cambio de</th>
+                        <th>Detalle</th>
+                        <th>Usuario</th>
+                        <th>Fecha</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaBody"></tbody>
+            </table>
+        </div>
+
+        <div id="paginacion" class="paginacion"></div>
+    </div>
+</div>
+
+<div id="modalAuditTicket" class="modal">
+    <div class="modal-content modal-medium">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Detalle de Auditoría</h3>
+            <button class="btn-action" onclick="cerrarModalTicket()">X</button>
+        </div>
+
+        <div id="contenidoModalTicket"></div>
+    </div>
+</div>
+
+<div class="theme-switch">
+    <label class="switch">
+        <input type="checkbox" onchange="toggleTheme()">
+        <span class="slider"></span>
+    </label>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/audit-tickets.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,63 @@
+﻿.page-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 240px;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(15px);
+    padding: 30px 20px;
+}
+
+body.light-mode .sidebar {
+    background: #FFFFFF;
+    border-right: 1px solid rgba(0,0,0,0.06);
+    backdrop-filter: none;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.05);
+}
+
+.sidebar h2 {
+    margin-bottom: 35px;
+    font-size: 18px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar li {
+    margin-bottom: 18px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    opacity: .85;
+    transition: .2s;
+}
+
+    .sidebar a:hover {
+        opacity: 1;
+        color: var(--accent);
+    }
+
+.main {
+    flex: 1;
+    padding: 25px 40px 60px 40px;
+}
+
+.header {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.page-header {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}

@@ -1,0 +1,52 @@
+﻿@model List<SelectListItem>
+
+<div>
+
+    <div class="modal-section">
+        <h4>Información del Usuario</h4>
+
+        <label>Nombre</label>
+        <input id="nombre"
+               class="input"
+               autocomplete="off" />
+
+        <label>Usuario</label>
+        <input id="username"
+               class="input"
+               autocomplete="off" />
+
+        <label>Contraseña</label>
+
+        <!-- Inputs fake para engañar al navegador -->
+        <input type="text" style="display:none" autocomplete="username">
+        <input type="password" style="display:none" autocomplete="current-password">
+
+        <!-- Input real -->
+        <input id="password"
+               name="campo_random_@(Guid.NewGuid().ToString("N"))"
+               class="input"
+               type="search"
+               autocomplete="off"
+               autocorrect="off"
+               autocapitalize="off"
+               spellcheck="false"
+               readonly
+               onfocus="this.removeAttribute('readonly'); this.type='password';" />
+
+        <label>Rol</label>
+        <select id="rol" class="input">
+            @foreach (var r in Model)
+            {
+                <option value="@r.Value">@r.Text</option>
+            }
+        </select>
+
+        <label>Foto</label>
+        <input type="file" id="foto" class="input" />
+    </div>
+
+    <br />
+
+    <button class="btn-action" onclick="crearUsuario()">Crear Usuario</button>
+
+</div>

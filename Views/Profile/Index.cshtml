@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Mi Perfil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var userName = User.Identity?.Name ?? "Usuario";
+    var userUsername = User.Claims.FirstOrDefault(c => c.Type == "Username")?.Value ?? "";
+    var userRole = User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value ?? "";
+    var userPhoto = User.Claims.FirstOrDefault(c => c.Type == "Photo")?.Value ?? "/img/users/default-user.png";
+}
+
+<div class="page-layout">
+    <div class="sidebar">
+        <h2>Perfil</h2>
+        <ul>
+            <li><a href="@Url.Action("Index", "Home")">← Volver al menú principal</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <header>Mi Perfil</header>
+
+        <div class="profile-card">
+            <div class="profile-header">
+                <img src="@userPhoto" alt="Foto de perfil" class="profile-image" />
+            </div>
+
+            <div class="profile-data">
+                <div class="profile-field">
+                    <label>Nombre</label>
+                    <input type="text" value="@userName" readonly />
+                </div>
+
+                <div class="profile-field">
+                    <label>Usuario</label>
+                    <input type="text" value="@userUsername" readonly />
+                </div>
+
+                <div class="profile-field">
+                    <label>Rol</label>
+                    <input type="text" value="@userRole" readonly />
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn-primary">Cerrar sesión</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="theme-switch">
+    <label class="switch">
+        <input type="checkbox" onchange="toggleTheme()">
+        <span class="slider"></span>
+    </label>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}

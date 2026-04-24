@@ -1,0 +1,77 @@
+﻿@model MesaDeAyuda.Models.Entities.Ticket
+
+<div class="container">
+
+    <!-- INFO GENERAL -->
+    <div class="modal-section">
+        <br>
+
+        <p><strong>Código:</strong> @Model.Codigo</p>
+
+        <p><strong>Título:</strong> @Model.Titulo</p>
+
+        <p><strong>Descripción:</strong> @Model.Descripcion</p>
+
+        <p>
+            <strong>Prioridad:</strong>
+            <span class="prioridad-@Model.Prioridad.Nombre.ToLower().Replace(" ", "").Replace("í", "i")">
+                @Model.Prioridad.Nombre
+            </span>
+        </p>
+
+        <p>
+            <strong>Estado:</strong>
+            <span class="status @Model.Estado.Nombre.ToLower().Replace(" ", "")">
+                @Model.Estado.Nombre
+            </span>
+        </p>
+    </div>
+
+    <!-- ADJUNTOS -->
+    <div class="modal-section">
+        <h4>Adjuntos</h4>
+
+        @if (Model.Adjuntos != null && Model.Adjuntos.Any())
+        {
+            <ul>
+                @foreach (var adj in Model.Adjuntos)
+                {
+                    <li>
+                        <a href="@adj.RutaArchivo" target="_blank">
+                            @adj.NombreArchivo
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No hay archivos adjuntos</p>
+        }
+    </div>
+
+    <!-- HISTORIAL -->
+    <div class="modal-section">
+        <h4>Historial de comentarios</h4>
+
+        @if (Model.Comentarios != null && Model.Comentarios.Any())
+        {
+            <div class="timeline">
+                @foreach (var c in Model.Comentarios.OrderByDescending(x => x.Fecha))
+                {
+                    <div style="margin-bottom:10px;">
+                        <strong>@c.Usuario.Nombre</strong>
+                        - @c.Fecha.ToString("dd/MM/yyyy HH:mm")
+                        <br />
+                        @c.Comentario
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No hay comentarios aún</p>
+        }
+    </div>
+
+</div>

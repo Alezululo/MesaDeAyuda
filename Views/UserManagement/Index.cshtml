@@ -1,0 +1,92 @@
+﻿@model List<MesaDeAyuda.Models.Entities.Usuario>
+
+@{
+    ViewData["Title"] = "Gestión de Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-layout">
+    <div class="sidebar">
+        <h2>Mesa de Ayuda</h2>
+        <ul>
+            <li><a href="@Url.Action("Manage", "Ticket")">Gestión de Tickets</a></li>
+            <li><a href="@Url.Action("Index", "UserManagement")">Gestión de Usuarios</a></li>
+            <li><a href="@Url.Action("Index", "Home")">← Volver</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="header" style="display:flex; justify-content:space-between; align-items:center;">
+            <h1>Gestión de Usuarios</h1>
+            <button class="btn-action" onclick="abrirCrearUsuario()">+ Nuevo Usuario</button>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaBody">
+                    @foreach (var u in Model)
+                    {
+                        <tr>
+                            <td>@u.Nombre</td>
+                            <td>@u.Username</td>
+                            <td>
+                                <span class="badge
+                                    @(u.Rol.Nombre == "Usuario" ? "usuario" :
+                                                                            u.Rol.Nombre == "TI" ? "ti" :
+                                                                            u.Rol.Nombre == "Gerencia" ? "gerencia" :
+                                                                            u.Rol.Nombre == "Administrador" ? "admin" : "")">
+                                    @u.Rol.Nombre
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge @(u.Activo ? "activo" : "inactivo")">
+                                    @(u.Activo ? "Activo" : "Inactivo")
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn-action" onclick="editarUsuario(@u.Id)">Editar</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PAGINACIÓN -->
+        <div id="paginacion" class="paginacion"></div>
+    </div>
+</div>
+
+<div id="modalUsuario" class="modal">
+    <div class="modal-content modal-medium">
+
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Gestión de Usuario</h3>
+            <button class="btn-action" onclick="cerrarModalUsuario()">X</button>
+        </div>
+
+        <div id="contenidoModalUsuario"></div>
+
+    </div>
+</div>
+
+<div class="theme-switch">
+    <label class="switch">
+        <input type="checkbox" onchange="toggleTheme()">
+        <span class="slider"></span>
+    </label>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/users.js" asp-append-version="true"></script>
+}

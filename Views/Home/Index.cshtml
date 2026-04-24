@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Panel Principal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var userName = User.Identity?.Name ?? "Usuario";
+    var userPhoto = User.Claims.FirstOrDefault(c => c.Type == "Photo")?.Value ?? "/img/users/default-user.png";
+}
+
+<div class="header-bar">
+
+    <div class="header-title">
+        <img src="~/img/logos/logo-helpdesk.png" alt="Logo HelpDesk" class="header-logo" />
+    </div>
+
+    <a class="profile-box" href="@Url.Action("Index", "Profile")" title="Ver perfil">
+        <img src="@userPhoto" alt="Foto de perfil" class="profile-box-img" />
+
+        <div class="profile-box-info">
+            <span class="profile-box-name">@userName</span>
+            <span class="profile-box-link">Mi perfil</span>
+        </div>
+    </a>
+
+</div>
+
+<div class="home-container">
+
+    <div class="section-title">Usuario</div>
+    <div class="grid">
+
+        <div class="card" onclick="location.href='@Url.Action("Create", "Ticket")'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2l9 4v6c0 5-3.8 9.4-9 10-5.2-.6-9-5-9-10V6l9-4z" />
+            </svg>
+            <h3>Registrar Solicitud</h3>
+            <p>Permite crear una nueva solicitud de soporte técnico.</p>
+        </div>
+
+        <div class="card" onclick="location.href='@Url.Action("MyTickets", "Ticket")'">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 3h18v2H3V3zm0 4h18v14H3V7zm4 3h10v2H7v-2z" />
+            </svg>
+            <h3>Consultar Estado</h3>
+            <p>Consulta el estado actual de tus solicitudes registradas.</p>
+        </div>
+
+    </div>
+
+    <div class="section-title">Personal de TI</div>
+    <div class="grid">
+
+        <div class="card" onclick="location.href='@Url.Action("Manage", "Ticket")'">
+            <svg viewBox="0 0 24 24">
+                <path d="M4 4h16v4H4V4zm0 6h16v10H4V10z" />
+            </svg>
+            <h3>Gestión de Tickets</h3>
+            <p>Administración y seguimiento de solicitudes de soporte.</p>
+        </div>
+
+        <div class="card" onclick="location.href='@Url.Action("Index", "UserManagement")'">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 12c2.7 0 8 1.3 8 4v2H4v-2c0-2.7 5.3-4 8-4zM12 2a4 4 0 110 8 4 4 0 010-8z" />
+            </svg>
+            <h3>Gestión de Usuarios</h3>
+            <p>Administración de cuentas y permisos del sistema.</p>
+        </div>
+
+    </div>
+
+    <div class="section-title">Gerencia</div>
+    <div class="grid">
+
+        <div class="card" onclick="location.href='@Url.Action("Index", "Reports")'">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 17h4v4H3v-4zm7-7h4v11h-4V10zm7-5h4v16h-4V5z" />
+            </svg>
+            <h3>Informes</h3>
+            <p>Visualización de reportes y métricas del servicio de soporte.</p>
+        </div>
+
+    </div>
+
+    <div class="section-title">Administración</div>
+    <div class="grid">
+
+        <div class="card" onclick="location.href='@Url.Action("AuditoriaTickets", "Admin")'">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 2a8 8 0 105.293 14.707l4 4 1.414-1.414-4-4A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
+            </svg>
+            <h3>Auditoría de Tickets</h3>
+            <p>Consulta el historial de cambios de los tickets.</p>
+        </div>
+
+        <div class="card" onclick="location.href='@Url.Action("AuditoriaUsuarios", "Admin")'">
+            <svg viewBox="0 0 24 24">
+                <path d="M10 2a8 8 0 105.293 14.707l4 4 1.414-1.414-4-4A8 8 0 0010 2zm0 2a6 6 0 110 12 6 6 0 010-12z" />
+            </svg>
+            <h3>Auditoría de Usuarios</h3>
+            <p>Consulta el historial de cambios realizados sobre usuarios.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="theme-switch">
+    <label class="switch">
+        <input type="checkbox" onchange="toggleTheme()">
+        <span class="slider"></span>
+    </label>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,96 @@
+﻿@model MesaDeAyuda.Models.ViewModels.CreateTicketViewModel
+
+@{
+    ViewData["Title"] = "Registrar Solicitud";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-layout">
+    <div class="sidebar">
+        <h2>Portal Usuario</h2>
+        <ul>
+            <li><a href="@Url.Action("Create", "Ticket")">Registrar Solicitud</a></li>
+            <li><a href="@Url.Action("MyTickets", "Ticket")">Consultar Estado</a></li>
+            <li><a href="@Url.Action("Index", "Home")">← Volver al menú principal</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <h1>Registrar Nueva Solicitud</h1>
+        </div>
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="message-success">@TempData["SuccessMessage"]</div>
+        }
+
+        <form asp-controller="Ticket"
+              asp-action="Create"
+              method="post"
+              enctype="multipart/form-data"
+              class="form-card">
+
+            @Html.AntiForgeryToken()
+
+            <!-- ERRORES -->
+            <div asp-validation-summary="All" style="color:red;"></div>
+
+            <div class="form-group">
+                <label asp-for="Titulo"></label>
+                <input asp-for="Titulo" type="text" placeholder="Ej: Problema con impresora en oficina 3" />
+                <span asp-validation-for="Titulo" class="field-validation"></span>
+            </div>
+
+            <label>Tipo de solicitud</label>
+            <select asp-for="TipoSolicitudId" asp-items="Model.TiposSolicitud">
+                <option value="">-- Seleccione --</option>
+            </select>
+
+            <label>Prioridad</label>
+            <select asp-for="PrioridadId" asp-items="Model.Prioridades">
+                <option value="">-- Seleccione --</option>
+            </select>
+
+            <div class="form-group">
+                <label asp-for="Descripcion"></label>
+                <textarea asp-for="Descripcion" placeholder="Describe el problema..." rows="4"></textarea>
+                <span asp-validation-for="Descripcion" class="field-validation"></span>
+            </div>
+
+            <!-- ARCHIVOS -->
+            <div class="form-group">
+                <label>Adjuntar archivos (opcional)</label>
+                <input type="file" name="archivos" multiple class="file-input" />
+            </div>
+
+            <!-- BOTONES -->
+            <div class="actions">
+                <button type="button" class="btn-secondary"
+                        onclick="window.location.href='@Url.Action("Index", "Home")'">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="btn-primary">
+                    Enviar Solicitud
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="theme-switch">
+    <label class="switch">
+        <input type="checkbox" onchange="toggleTheme()">
+        <span class="slider"></span>
+    </label>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

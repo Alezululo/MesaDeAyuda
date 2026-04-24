@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "Auditoría de Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var usuariosAfectados = ViewBag.UsuariosAfectados as List<string> ?? new List<string>();
+    var accionesUsuarios = ViewBag.AccionesUsuarios as List<string> ?? new List<string>();
+    var usuariosEjecutores = ViewBag.UsuariosEjecutores as List<string> ?? new List<string>();
+}
+
+<div class="page-layout">
+    <div class="sidebar">
+        <h2>Administración</h2>
+        <ul>
+            <li><a href="@Url.Action("AuditoriaTickets", "Admin")">Auditoría de Tickets</a></li>
+            <li><a href="@Url.Action("AuditoriaUsuarios", "Admin")">Auditoría de Usuarios</a></li>
+            <li><a href="@Url.Action("Index", "Home")">← Volver al menú principal</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <h1>Auditoría de Usuarios</h1>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label>Usuario afectado</label>
+                <select id="filtroUsuarioAfectado">
+                    <option value="">Todos</option>
+                    @foreach (var u in usuariosAfectados)
+                    {
+                        <option value="@u">@u</option>
+                    }
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Acción</label>
+                <select id="filtroAccion">
+                    <option value="">Todas</option>
+                    @foreach (var a in accionesUsuarios)
+                    {
+                        <option value="@a">@a</option>
+                    }
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Usuario que ejecutó</label>
+                <select id="filtroUsuarioAccion">
+                    <option value="">Todos</option>
+                    @foreach (var u in usuariosEjecutores)
+                    {
+                        <option value="@u">@u</option>
+                    }
+                </select>
+            </div>
+
+            <div style="display:flex; align-items:end;">
+                <button class="btn-action" onclick="cargarAuditoriaUsuarios()">Filtrar</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Usuario Afectado</th>
+                        <th>Acción</th>
+                        <th>Detalle</th>
+                        <th>Usuario que ejecutó</th>
+                        <th>Fecha</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaBody"></tbody>
+            </table>
+        </div>
+
+        <div id="paginacion" class="paginacion"></div>
+    </div>
+</div>
+
+<div id="modalAuditUsuario" class="modal">
+    <div class="modal-content modal-medium">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Detalle de Auditoría</h3>
+            <button class="btn-action" onclick="cerrarModalUsuario()">X</button>
+        </div>
+
+        <div id="contenidoModalUsuario"></div>
+    </div>
+</div>
+
+<div class="theme-switch">
+    <label class="switch">
+        <input type="checkbox" onchange="toggleTheme()">
+        <span class="slider"></span>
+    </label>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/audit-users.js" asp-append-version="true"></script>
+}

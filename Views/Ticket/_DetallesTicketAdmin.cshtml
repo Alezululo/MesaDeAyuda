@@ -1,0 +1,158 @@
+﻿@model MesaDeAyuda.Models.Entities.Ticket
+
+@{
+    var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+    var rol = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
+
+    bool puedeEditar = rol == "Administrador" || (rol == "TI" && Model.TecnicoAsignadoId?.ToString() == userId);
+}
+
+<div>
+
+    <!-- INFO GENERAL -->
+    <div class="modal-section">
+        <h4>Información General</h4>
+        <p><strong>Código:</strong> @Model.Codigo</p>
+        <p><strong>Usuario:</strong> @Model.Usuario?.Nombre</p>
+        <p><strong>Título:</strong> @Model.Titulo</p>
+        <p><strong>Descripción:</strong> @Model.Descripcion</p>
+
+        <p>
+            <strong>Estado:</strong>
+            <span class="status @Model.Estado.Nombre.ToLower().Replace(" ", "")"> @Model.Estado.Nombre</span>
+        </p>
+
+        <p>
+            <strong>Prioridad:</strong>
+            <span class="prioridad-@Model.Prioridad.Nombre.ToLower().Replace(" ", "").Replace("í", "i")">@Model.Prioridad.Nombre</span>
+        </p>
+    </div>
+
+    <hr />
+
+    <!-- ASIGNACIÓN -->
+    <div class="modal-section">
+        <h4>Asignar Técnico</h4>
+
+        <select id="tecnicoId" class="input" @(puedeEditar ? "" : "disabled")>
+            <option value="">Sin asignar</option>
+            @foreach (var t in ViewBag.Tecnicos)
+            {
+                <option value="@t.Value"
+                        selected="@(Model.TecnicoAsignadoId?.ToString() == t.Value)">
+                    @t.Text
+                </option>
+            }
+        </select>
+    </div>
+
+    <!-- ESTADO -->
+    <div class="modal-section">
+        <h4>Cambiar Estado</h4>
+
+        <select id="estadoId" class="input" @(puedeEditar ? "" : "disabled")>
+            @foreach (var e in ViewBag.Estados)
+            {
+                <option value="@e.Value"
+                        selected="@(Model.EstadoActualId.ToString() == e.Value)">
+                    @e.Text
+                </option>
+            }
+        </select>
+    </div>
+
+    <!-- PRIORIDAD -->
+    <div class="modal-section">
+        <h4>Cambiar Prioridad</h4>
+
+        <select id="prioridadId" class="input" @(puedeEditar ? "" : "disabled")>
+            @foreach (var p in ViewBag.Prioridades)
+            {
+                <option value="@p.Value"
+                        selected="@(Model.PrioridadId.ToString() == p.Value)">
+                    @p.Text
+                </option>
+            }
+        </select>
+    </div>
+
+    <hr />
+
+    <!-- ADJUNTOS -->
+    <div class="modal-section">
+        <h4>Adjuntos</h4>
+
+        @if (Model.Adjuntos != null && Model.Adjuntos.Any())
+        {
+            <ul>
+                @foreach (var adj in Model.Adjuntos)
+                {
+                    <li>
+                        <a href="@adj.RutaArchivo" target="_blank">
+                            @adj.NombreArchivo
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No hay adjuntos</p>
+        }
+    </div>
+
+    <hr />
+
+    <!-- HISTORIAL -->
+    <div class="modal-section">
+        <h4>Historial de comentarios</h4>
+
+        @if (Model.Comentarios != null && Model.Comentarios.Any())
+        {
+            <div class="timeline">
+                @foreach (var c in Model.Comentarios.OrderByDescending(x => x.Fecha))
+                {
+                    <div>
+                        <strong>@c.Usuario.Nombre</strong> - @c.Fecha.ToString("dd/MM/yyyy HH:mm")
+                        <br />
+                        @c.Comentario
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No hay comentarios aún</p>
+        }
+    </div>
+
+    <hr />
+
+    <!-- COMENTARIO -->
+    <div class="modal-section">
+        <h4>Agregar Comentario</h4>
+
+        <textarea id="comentario"
+              class="comment-box"
+              rows="3"
+              placeholder="Escribe un comentario..."
+        @(puedeEditar ? "" : "disabled")>
+    </textarea>
+</div>
+
+<br />
+
+@if (puedeEditar)
+{
+    <button class="btn-action" onclick="guardarCambios(@Model.Id)">
+        Guardar Cambios
+    </button>
+}
+else
+{
+    <p style="opacity:0.7;">
+        Solo puedes editar tickets asignados a ti.
+    </p>
+}
+
+</div>

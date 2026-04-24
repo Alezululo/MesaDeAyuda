@@ -1,0 +1,123 @@
+﻿@{
+    ViewData["Title"] = "Informes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-layout">
+    <div class="sidebar">
+        <h2>Gerencia</h2>
+        <ul>
+            <li><a href="@Url.Action("Index", "Reports")">Informes</a></li>
+            <li><a href="@Url.Action("Index", "Home")">← Volver al menú Principal</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <h1>Informes y Métricas del Servicio</h1>
+        </div>
+
+        <!-- FILTROS -->
+        <div class="filters">
+
+            <div class="filter-group">
+                <label>Fecha Inicio</label>
+                <input type="date" id="fechaInicio">
+            </div>
+
+            <div class="filter-group">
+                <label>Fecha Fin</label>
+                <input type="date" id="fechaFin">
+            </div>
+
+            <div class="filter-group">
+                <label>Técnico</label>
+                <select id="tecnico">
+                    <option value="">Todos</option>
+                    @foreach (var t in ViewBag.Tecnicos)
+                    {
+                        <option value="@t.Value">@t.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Estado</label>
+                <select id="estado">
+                    <option value="">Todos</option>
+                    @foreach (var e in ViewBag.Estados)
+                    {
+                        <option value="@e.Value">@e.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div style="display:flex; align-items:end; gap:10px;">
+                <button class="btn-action" type="button" onclick="filtrar()">Filtrar</button>
+                <button class="btn-action" type="button" onclick="exportarExcel()">Exportar Excel</button>
+            </div>
+
+        </div>
+
+        <!-- KPIs -->
+        <div class="kpi-grid">
+            <div class="kpi">
+                <h3 id="kpiTotal">0</h3>
+                <span>Tickets Totales</span>
+            </div>
+            <div class="kpi">
+                <h3 id="kpiAbiertos">0</h3>
+                <span>Abiertos</span>
+            </div>
+            <div class="kpi">
+                <h3 id="kpiEnProceso">0</h3>
+                <span>En Proceso</span>
+            </div>
+            <div class="kpi">
+                <h3 id="kpiCerrados">0</h3>
+                <span>Cerrados</span>
+            </div>
+            <div class="kpi">
+                <h3 id="kpiTiempo">0h</h3>
+                <span>Tiempo Promedio Respuesta</span>
+            </div>
+            <div class="kpi">
+                <h3 id="kpiResolucion">0h</h3>
+                <span>Tiempo Promedio Resolución</span>
+            </div>
+        </div>
+
+        <!-- TABLA -->
+        <div class="table-container">
+            <table id="tablaInformes">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Técnico</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Tiempo Respuesta</th>
+                        <th>Tiempo Resolución</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaBody"></tbody>
+            </table>
+        </div>
+
+        <!-- PAGINACIÓN -->
+        <div id="paginacion" class="paginacion"></div>
+        
+    </div>
+</div>
+
+<div class="theme-switch">
+    <label class="switch">
+        <input type="checkbox" onchange="toggleTheme()">
+        <span class="slider"></span>
+    </label>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/reports.js" asp-append-version="true"></script>
+}

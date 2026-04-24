@@ -1,0 +1,58 @@
+﻿@model MesaDeAyuda.Models.Entities.Usuario
+
+@{
+    var roles = ViewBag.Roles as List<SelectListItem>;
+}
+
+<div>
+    <input type="hidden" id="id" value="@Model.Id" />
+
+    <div class="modal-section">
+        <h4>Información del Usuario</h4>
+
+        <label>Nombre</label>
+        <input id="nombre" class="input" value="@Model.Nombre" autocomplete="off" />
+
+        <label>Usuario</label>
+        <input id="username" class="input" value="@Model.Username" autocomplete="off" />
+
+        <label>Nueva Contraseña (opcional)</label>
+
+        <input type="text" style="display:none" autocomplete="username">
+        <input type="password" style="display:none" autocomplete="current-password">
+
+        <input id="password"
+               name="campo_random_@(Guid.NewGuid().ToString("N"))"
+               class="input"
+               type="search"
+               autocomplete="off"
+               autocorrect="off"
+               autocapitalize="off"
+               spellcheck="false"
+               readonly
+               onfocus="this.removeAttribute('readonly'); this.type='password';" />
+
+        <label>Rol</label>
+        <select id="rol" class="input">
+            @foreach (var r in roles)
+            {
+                <option value="@r.Value" selected="@(r.Value == Model.RolId.ToString())">
+                    @r.Text
+                </option>
+            }
+        </select>
+
+        <label>Estado</label>
+        <select id="activo" class="input">
+            <option value="true" selected="@(Model.Activo)">Activo</option>
+            <option value="false" selected="@(!Model.Activo)">Inactivo</option>
+        </select>
+
+        <label>Foto</label>
+        <input type="file" id="foto" class="input" />
+    </div>
+
+    <br />
+
+    <button class="btn-action" onclick="actualizarUsuario()">Guardar Cambios</button>
+</div>

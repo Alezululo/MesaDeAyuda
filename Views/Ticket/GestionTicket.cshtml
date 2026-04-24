@@ -1,0 +1,117 @@
+﻿@model List<MesaDeAyuda.Models.Entities.Ticket>
+@Html.AntiForgeryToken()
+
+@{
+    ViewData["Title"] = "Gestión de Tickets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-layout">
+    <div class="sidebar">
+        <h2>Mesa de Ayuda</h2>
+        <ul>
+            <li><a href="@Url.Action("Manage", "Ticket")">Gestión de Tickets</a></li>
+            <li><a href="@Url.Action("Index", "UserManagement")">Gestión de Usuarios</a></li>
+            <li><a href="@Url.Action("Index", "Home")">← Volver al menú principal</a></li>
+        </ul>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <h1>Panel TI - Tickets</h1>
+        </div>
+
+        <!-- Dashboard dinámico -->
+        <div class="dashboard">
+            <div class="card-small">
+                <h2>@Model.Count(t => t.Estado.Nombre == "Abierto")</h2>
+                <p>Abiertos</p>
+            </div>
+            <div class="card-small">
+                <h2>@Model.Count(t => t.Estado.Nombre == "En Proceso")</h2>
+                <p>En Proceso</p>
+            </div>
+            <div class="card-small">
+                <h2>@Model.Count(t => t.Estado.Nombre == "Cerrado")</h2>
+                <p>Cerrados</p>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Usuario</th>
+                        <th>Técnico</th>
+                        <th>Prioridad</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaBody">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var t in Model)
+                        {
+                            <tr>
+                                <td>@t.Codigo</td>
+                                <td>@t.Usuario.Nombre</td>
+                                <td>
+                                    @(t.TecnicoAsignado != null ? t.TecnicoAsignado.Nombre : "Sin asignar")
+                                </td>
+                                <td>
+                                    <span class="prioridad-@t.Prioridad.Nombre.ToLower().Replace(" ", "").Replace("í", "i")">
+                                        @t.Prioridad.Nombre
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status @t.Estado.Nombre.ToLower().Replace(" ", "")">
+                                        @t.Estado.Nombre
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn-action" onclick="verTicketAdmin(@t.Id)">Ver</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6">No hay tickets registrados.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- PAGINACIÓN -->
+        <div id="paginacion" class="paginacion"></div>
+        
+    </div>  
+</div>
+
+<div id="modalTicket" class="modal">
+    <div class="modal-content modal-large">
+
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3>Gestión de Ticket</h3>
+                <button class="btn-action" onclick="cerrarModal()">X</button>
+            </div>
+
+        <div id="contenidoModal"></div>
+
+    </div>
+</div>
+
+<div class="theme-switch">
+    <label class="switch">
+        <input type="checkbox" onchange="toggleTheme()">
+        <span class="slider"></span>
+    </label>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/tickets.js" asp-append-version="true"></script>
+}

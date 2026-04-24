@@ -1,0 +1,218 @@
+:root {
+    --bg1: #0B1F2A;
+    --bg2: #123447;
+    --primary: #1F6F8B;
+    --accent: #2E8B57;
+    --text: #E6EEF3;
+    --card-bg: rgba(255,255,255,0.05);
+    --card: rgba(255,255,255,0.05);
+    --border: #1F6F8B;
+    --alert-bg: #102A38;
+    --alert-border: #D4A017;
+}
+
+body.light-mode {
+    --bg1: #EAF2F7;
+    --bg2: #D6E4EC;
+    --primary: #1F6F8B;
+    --accent: #2E8B57;
+    --text: #1C2B33;
+    --card-bg: rgba(255,255,255,0.9);
+    --card: rgba(255,255,255,0.9);
+    --border: #1F6F8B;
+    --alert-bg: #FFFFFF;
+    --alert-border: #D4A017;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI',sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg,var(--bg1),var(--bg2));
+    color: var(--text);
+    transition: 0.4s ease;
+}
+
+.theme-switch {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--primary);
+    transition: .4s;
+    border-radius: 30px;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+input:checked + .slider {
+    background: var(--accent);
+}
+
+    input:checked + .slider:before {
+        transform: translateX(24px);
+    }
+
+select {
+    color: var(--text);
+    background-color: transparent;
+}
+
+    select option {
+        background: #123447;
+        color: #E6EEF3;
+    }
+
+body.light-mode select option {
+    background: #ffffff;
+    color: #1C2B33;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: inline-block;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status.abierto {
+    background: #2E8B57;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.status.enproceso {
+    background: orange;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.status.cerrado {
+    background: red;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.prioridad-critica {
+    background: #8B0000;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.prioridad-alta {
+    background: red;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.prioridad-media {
+    background: orange;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.prioridad-baja {
+    background: #2E8B57;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.usuario {
+    background: #1F6F8B;
+    color: white;
+}
+
+.ti {
+    background: #2E8B57;
+    color: white;
+}
+
+.gerencia {
+    background: #D4A017;
+    color: black;
+}
+
+.admin {
+    background-color: #6f42c1;
+    color: #fff;
+}
+
+.activo {
+    background: #2E8B57;
+    color: white;
+}
+
+.inactivo {
+    background: #A83232;
+    color: white;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    gap: 4px;
+}
