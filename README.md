@@ -1,308 +1,236 @@
-##### **GUÍA DEL LOGIN**
+# MesaDeAyuda
 
+![.NET](https://img.shields.io/badge/.NET-10-blue)
+![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-red)
+![License](https://img.shields.io/badge/license-MIT-green)
 
+Sistema web de gestión de tickets e incidencias desarrollado en ASP.NET Core MVC y SQL Server.
 
-**Los usuarios de ingreso iniciales son:**
+## Descripción
 
+MesaDeAyuda es una plataforma diseñada para centralizar la gestión de solicitudes de soporte técnico dentro de una organización.
 
+El sistema permite a los usuarios registrar incidencias, realizar seguimiento a sus solicitudes y consultar el historial de atención. Por su parte, el personal de soporte puede gestionar tickets, asignar responsables, actualizar estados y generar reportes de desempeño.
 
-Tipo de cuenta: Usuario
+## Características principales
 
-Usuario: jperez
+* Autenticación de usuarios.
+* Gestión de roles y permisos.
+* Creación de tickets de soporte.
+* Asignación de técnicos.
+* Seguimiento del ciclo de vida de los tickets.
+* Historial de cambios y auditoría.
+* Gestión de usuarios.
+* Comentarios sobre tickets.
+* Adjuntos y evidencias.
+* Reportes exportables a Excel.
+* Dashboard administrativo.
+* Soporte para tema claro y oscuro.
 
-Contraseña: 1234
+## Roles disponibles
 
+* Administrador
+* Soporte de TI
+* Usuario
+* Gerencia
 
+## Tecnologías utilizadas
 
-Tipo de cuenta: Usuario
+### Backend
 
-Usuario: Epalacio
+* ASP.NET Core MVC
+* Entity Framework Core
+* SQL Server
 
-Contraseña: 1234
+### Frontend
 
+* Razor Pages
+* Bootstrap
+* JavaScript
+* CSS personalizado
 
+### Seguridad
 
-Tipo de cuenta: Soporte de TI
+* Hash de contraseñas
+* Control de acceso basado en roles
+* Autenticación mediante cookies
 
-Usuario: lgomez
+## Estructura del proyecto
 
-Contraseña: 1234
+```text
+Controllers/
+Data/
+Database/
+Helpers/
+Models/
+Views/
+wwwroot/
+```
 
+## Instalación
 
+### 1. Clonar el repositorio
 
-Tipo de cuenta: Soporte de TI
+```bash
+git clone https://github.com/Alezululo/MesaDeAyuda.git
+```
 
-Usuario: mherrera
+### 2. Crear la base de datos
 
-Contraseña: 1234
+Ejecutar el archivo:
 
+```text
+Database/Schema_and_Data.sql
+```
 
+en SQL Server Management Studio.
 
-Tipo de cuenta: Administrador
+### 3. Configurar la cadena de conexión
 
-Usuario: admin
+Editar el archivo:
 
-Contraseña: 1234
+```text
+appsettings.json
+```
 
+y actualizar la cadena de conexión según el entorno local.
 
+### 4. Ejecutar la aplicación
 
-Tipo de cuenta: Administrador
+```bash
+dotnet restore
+dotnet build
+dotnet run
+```
 
-Usuario: azuluaga
+## Credenciales de prueba
 
-Contraseña: 1234
+### Administrador
 
+Usuario:
 
+```text
+admin
+```
 
-Tipo de cuenta: Gerencia
+Contraseña:
 
-Usuario: cmartinez
+```text
+1234
+```
 
-Contraseña: 1234
+Usuario:
 
+```text
+azuluaga
+```
 
+Contraseña:
 
+```text
+1234
+```
 
+### Soporte de TI
 
+Usuario:
 
+```text
+lgomez
+```
 
-##### **GUÍA DEL CSS**
+Contraseña:
 
-###### 
+```text
+1234
+```
 
-###### **site.css:**
+Usuario:
 
+```text
+mherrera
+```
 
+Contraseña:
 
-Es la base global del sistema.
+```text
+1234
+```
 
+### Usuario
 
+Usuario:
 
-Aquí van:
+```text
+jperez
+```
 
+Contraseña:
 
+```text
+1234
+```
 
-* colores y variables (:root)
-* modo claro/oscuro
-* estilos globales de body
-* switch del tema
-* badges y colores reutilizables
-* estados y prioridades
-* filtros genéricos
+Usuario:
 
+```text
+epalacio
+```
 
+Contraseña:
 
-Si quieres cambiar:
+```text
+1234
+```
 
+### Gerencia
 
+Usuario:
 
-* colores del sistema
-* color de un estado
-* color de una prioridad
-* color de un badge
-* apariencia global de selects
-* espaciado base de filtros
+```text
+cmartinez
+```
 
+Contraseña:
 
+```text
+1234
+```
 
-Se hace aquí.
+## Capturas de pantalla
 
+### Inicio de sesión
 
+![Login](Docs/Images/login.png)
 
+### Dashboard principal
 
+![Dashboard](Docs/Images/dashboard.png)
 
-###### **layout.css:**
+### Gestión de tickets
 
+![Tickets](Docs/Images/gestion-tickets.png)
 
+### Gestión de usuarios
 
-Es la estructura general de las páginas.
+![Usuarios](Docs/Images/gestion-usuarios.png)
 
+### Informes
 
+![Informes](Docs/Images/informes.png)
 
-Aquí van:
+## Integración Continua (CI)
 
+El repositorio puede utilizar GitHub Actions para ejecutar automáticamente:
 
+* Restauración de dependencias
+* Compilación del proyecto
+* Validación de errores de compilación
 
-* .page-layout
-* .sidebar
-* .main
-* headers estructurales
-* distribución general de páginas con menú lateral
+Cada cambio enviado al repositorio puede ser verificado automáticamente antes de su despliegue.
 
+## Autor
 
+Alejandro Zuluaga López
 
-Si quieres cambiar:
-
-
-
-* ancho del sidebar
-* padding del contenido principal
-* separación entre menú y contenido
-* estilo base del menú lateral
-* comportamiento del layout general
-
-
-
-lo haces aquí.
-
-
-
-
-
-###### **components.css:**
-
-
-
-Aquí van los bloques reutilizables de interfaz.
-
-
-
-Piensa en “piezas” del sistema:
-
-
-
-* tablas
-* modales
-* botones
-* paginación
-* formularios
-* cards pequeñas
-* timeline
-* inputs reutilizables
-* contenedores como .table-container, .modal-content, .form-card
-
-
-
-Si quieres cambiar:
-
-
-
-* una tabla
-* un botón
-* un modal
-* un input
-* un label dentro de formularios/modales
-* paginación
-* card pequeña de dashboard
-
-
-
-lo haces aquí.
-
-
-
-
-
-###### **pages.css:**
-
-
-
-Aquí van estilos específicos de páginas concretas.
-
-
-
-O sea, cosas que no son globales ni reutilizables, sino propias de:
-
-
-
-* Home
-* Login
-* Access Denied
-* header del home
-* cards del home
-* perfil visual del home/login
-
-
-
-Si quieres cambiar:
-
-
-
-* cards del panel principal
-* logo del home
-* caja del perfil arriba
-* formulario de login
-* alerta del login
-* pantalla de acceso denegado
-
-
-
-lo haces aquí.
-
-
-
-
-
-**Resumen:**
-
----
-
-* Si afecta a todo el sistema: **site.css**
-* Si afecta a la estructura de la página: **layout.css**
-* Si afecta a una pieza reutilizable: **components.css**
-* Si afecta a una pantalla específica: **pages.css**
-
-
-
-
-
-
-
-##### **GUÍA de las vistas**
-
-
-
-###### **Account:**
-
-1. **AccessDenied.cshtml:** Se muestra el mensaje de acceso denegado a una URL no autorizada para el usuario logueado.
-2. **Login.cshtml:** Formulario de inicio de sesión.
-
-###### 
-
-###### **Admin:**
-
-1. **AuditoriaTickets.cshtml:** Tabla de registros de cambios en las prioridades y asignaciones de los tickets.
-2. **AuditoriaUsuarios.cshtml:** abla de registros de cambios de cualquier indole en las cuentas de usuario.
-
-###### 
-
-###### **Home:**
-
-1. **Index.cshtml:** Menu principal dónde se encuentran todos los modulos.
-2. **Privacy.cshtml:** Politica de privacidad de la pagina, en caso de necesitarse para tratamiento de datos.
-
-###### 
-
-###### **Profile:**
-
-1. **Index.cshtml:** Modulo dónde se visualiza el perfil del usuario logueado y sus datos basicos, asi como el cierre de sesión.
-
-###### 
-
-###### **Reports:**
-
-**Index.cshtml:** Modulo dónde se visualizan las metricas de los tecnicos y se exportan a excel.
-
-
-
-###### **Tickets:**
-
-1. **CrearTicket.cshtml:** Modulo dónde se llena el formulario de creación de ticket.
-2. **GestionTicket.cshtml:** Modulo dónde el personal de TI le da manejo al ticket.
-3. **VerTicketsUsuario.cshtml:** Modulo dónde el usuario puede ver los tickets que ha solicitado.
-4. **\_DetalleAuditoriaAsignacion.cshtml:** Modal que muestra a detalle el cambio especifico de tecnicos que se hizo.
-5. **\_DetalleAuditoriaEstado.cshtml:** Modal que muestra a detalle el cambio especifico de prioridad que se hizo.
-6. **\_DetallesTicketAdmin.cshtml:** Modal que muestra a detalle un ticket al personal de soporte de ti.
-7. **\_DetallesTicketUsuario.cshtml:** Modal que muestra a detalle como va el proceso de un ticket al usuario.
-8. **\_DetalleAuditoriaUsuario.cshtml:** Modal que muestra a detalle los cambios realizados en el usuario.
-
-
-
-###### **UserManagement:**
-
-1. **Index.cshtml:** Modulo dónde se ven y gestionan los usuarios del sistema.
-2. **\_CrearUsuario.cshtml:** Modal que permite crear un nuevo usuario.
-3. **\_EditarUsuario.cshtml:** Modal que permite editar a un usuario existente.
-
-
-
+Proyecto desarrollado como evidencia final del programa Tecnólogo en Análisis y Desarrollo de Software del SENA.
