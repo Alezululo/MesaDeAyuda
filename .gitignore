@@ -1,0 +1,36 @@
+﻿# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build
+bin/
+obj/
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# NuGet
+*.nupkg
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Publicación
+publish/
+
+# Archivos generados
+TestResults/
+
+# Secretos locales
+appsettings.Development.json
+secrets.json
