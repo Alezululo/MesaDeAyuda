@@ -34,6 +34,33 @@ El sistema permite a los usuarios registrar incidencias, realizar seguimiento a 
 * Usuario
 * Gerencia
 
+## Funcionalidades por rol
+
+### Administrador
+
+- Gestión de usuarios.
+- Gestión de roles.
+- Administración general del sistema.
+- Consulta de reportes.
+- Revisión de auditorías.
+
+### Soporte de TI
+
+- Gestión y seguimiento de tickets.
+- Actualización de estados.
+- Atención de incidencias.
+
+### Usuario
+
+- Creación de solicitudes.
+- Consulta del estado de sus tickets.
+- Seguimiento del historial de atención.
+
+### Gerencia
+
+- Consulta de indicadores y reportes.
+- Seguimiento general de la operación.
+
 ## Tecnologías utilizadas
 
 ### Backend
@@ -44,7 +71,7 @@ El sistema permite a los usuarios registrar incidencias, realizar seguimiento a 
 
 ### Frontend
 
-* Razor Pages
+* Razor Views
 * Bootstrap
 * JavaScript
 * CSS personalizado
@@ -54,6 +81,35 @@ El sistema permite a los usuarios registrar incidencias, realizar seguimiento a 
 * Hash de contraseñas
 * Control de acceso basado en roles
 * Autenticación mediante cookies
+
+## Arquitectura
+
+MesaDeAyuda sigue el patrón de arquitectura MVC (Model-View-Controller) proporcionado por ASP.NET Core, separando las responsabilidades de la aplicación en capas para facilitar su mantenimiento y escalabilidad.
+
+### Controllers
+
+Contienen la lógica de aplicación y gestionan las solicitudes HTTP recibidas desde la interfaz de usuario. Se encargan de procesar la información, interactuar con la capa de datos y devolver las vistas correspondientes.
+
+### Models
+
+Representan las entidades del sistema y las estructuras utilizadas para el intercambio de información entre la aplicación y la base de datos.
+
+### Views
+
+Implementadas mediante Razor Views, constituyen la interfaz de usuario de la aplicación y permiten la interacción entre los usuarios y el sistema.
+
+### Data
+
+Gestiona el acceso a datos mediante Entity Framework Core, incluyendo el contexto de base de datos y las configuraciones necesarias para la persistencia de información.
+
+### Helpers
+
+Contiene utilidades y componentes reutilizables que encapsulan lógica auxiliar utilizada en diferentes módulos de la aplicación.
+
+### Base de Datos
+
+La persistencia de datos se realiza mediante SQL Server, almacenando información relacionada con usuarios, roles, tickets, comentarios, estados, prioridades y registros de auditoría.
+
 
 ## Estructura del proyecto
 

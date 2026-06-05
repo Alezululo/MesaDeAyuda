@@ -9,6 +9,9 @@
 bin/
 obj/
 
+# archivos locales
+*.user
+
 # Rider
 .idea/
 
